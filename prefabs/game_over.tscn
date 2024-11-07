@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxcev3t20xvmi"]
+
+[ext_resource type="FontFile" uid="uid://cwbt2ugsjq30h" path="res://font/Dihil.ttf" id="1_c656k"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_o63xp"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("1_o63xp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -67.0
+offset_right = 163.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_c656k")
+theme_override_font_sizes/font_size = 50
+text = "Game Over"
+
+[node name="ButtonReestart" type="Button" parent="VBoxContainer"]
+modulate = Color(0.188235, 1, 1, 1)
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_c656k")
+theme_override_font_sizes/font_size = 30
+text = "Reinicar"
+
+[node name="ButtonMenu2" type="Button" parent="VBoxContainer"]
+modulate = Color(0.188235, 1, 1, 1)
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_c656k")
+theme_override_font_sizes/font_size = 30
+text = "Menu"
+
+[connection signal="pressed" from="VBoxContainer/ButtonReestart" to="." method="_on_button_reestart_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonMenu2" to="." method="_on_button_menu_2_pressed"]

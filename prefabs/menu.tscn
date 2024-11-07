@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://mpcd6nlnsql1"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_1a363"]
+[ext_resource type="Texture2D" uid="uid://cybsrgexcga7k" path="res://assets/game-title.png" id="1_3pn3m"]
+[ext_resource type="Texture2D" uid="uid://65on1bknij1r" path="res://assets/bg.png" id="1_fi2aq"]
+[ext_resource type="FontFile" uid="uid://cwbt2ugsjq30h" path="res://font/Dihil.ttf" id="2_q13ga"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1a363")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fi2aq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 46.0
+offset_top = 114.0
+offset_right = 1296.0
+offset_bottom = 760.0
+scale = Vector2(0.304774, 0.304774)
+texture = ExtResource("1_3pn3m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.5
+offset_top = -213.0
+offset_right = 62.5
+offset_bottom = -147.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ButtonStart" type="Button" parent="VBoxContainer"]
+modulate = Color(0, 0.690196, 0.784314, 1)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.32608, 0.356071, 0.918731, 1)
+theme_override_colors/font_hover_color = Color(0.241263, 0.235711, 0.793527, 1)
+theme_override_fonts/font = ExtResource("2_q13ga")
+theme_override_font_sizes/font_size = 40
+text = "Iniciar Jogo"
+
+[node name="ButtonExit" type="Button" parent="VBoxContainer"]
+modulate = Color(0.972549, 0, 0.203922, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q13ga")
+theme_override_font_sizes/font_size = 40
+text = "Sair"
+
+[connection signal="pressed" from="VBoxContainer/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]

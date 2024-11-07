@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://ck2313cspmjme"]
+
+[ext_resource type="PackedScene" uid="uid://cdfw2huwqvar" path="res://prefabs/player.tscn" id="1_hehr0"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_o2eyo"]
+[ext_resource type="PackedScene" uid="uid://difhr4im2006s" path="res://prefabs/enemy.tscn" id="2_tt8dk"]
+[ext_resource type="AudioStream" uid="uid://d4i43iph5pkxe" path="res://sounds/House In a Forest Loop.ogg" id="4_u4hjo"]
+[ext_resource type="PackedScene" uid="uid://bxcev3t20xvmi" path="res://prefabs/game_over.tscn" id="5_qqwyj"]
+[ext_resource type="FontFile" uid="uid://cwbt2ugsjq30h" path="res://font/Dihil.ttf" id="6_wlgns"]
+
+[sub_resource type="Curve2D" id="Curve2D_4j4bb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_o2eyo")
+bug_scene = ExtResource("2_tt8dk")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 235.0
+offset_top = 71.0
+offset_right = 235.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Score" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -23.0
+offset_right = 16.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.439496, 0.315976, 0.982674, 1)
+theme_override_fonts/font = ExtResource("6_wlgns")
+theme_override_font_sizes/font_size = 45
+text = "0"
+
+[node name="player" parent="." instance=ExtResource("1_hehr0")]
+position = Vector2(159, 167)
+
+[node name="BugTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTime" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 360)
+
+[node name="BugPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4j4bb")
+
+[node name="BugPathLocation" type="PathFollow2D" parent="BugPath"]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_u4hjo")
+
+[node name="GameOver" parent="." instance=ExtResource("5_qqwyj")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 83.0
+offset_top = 288.0
+offset_right = 408.0
+offset_bottom = 425.0
+
+[connection signal="hit" from="player" to="." method="game_over"]
+[connection signal="timeout" from="BugTimer" to="." method="_on_bug_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTime" to="." method="_on_start_time_timeout"]
